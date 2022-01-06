@@ -23,9 +23,14 @@ canvas = Canvas(frame1, width=photo.width(), height=photo.height(), background="
 canvas.create_image(0, 0, anchor=NW, image=photo)
 canvas.pack()
 
-#bouton
-Button(fen, text ='Niveau précedent').pack(side='left', padx=5, pady=5)
-Button(fen, text ='Niveau suivant').pack(side='right', padx=5, pady=5)
+
+#bouton début de jeu
+bouton_jouer = Button(fen, text="Jouer", command=lambda : init_ennemy(5))
+bouton_jouer.pack()
+
+#création joueur
+player = fct.joueur(canvas=canvas) #mettre les arguments
+
 
 #création ennemy
 global liste_enemy 
@@ -35,7 +40,7 @@ liste_enemy = []
 def init_ennemy(lvl) :
     global liste_enemy, x2,y2,mouv_pass
     for k in liste_enemy :
-        canvas.delete(k)#penser a reset les ennemy du canvas
+        canvas.delete(k)
     ligne1 = []
     ligne2=[]
     ligne3=[]
@@ -71,9 +76,7 @@ def mouv() :
         canvas.move(i,dir,0)
     fen.after(50,mouv)
 
-#bouton début de jeu
-bouton_jouer = Button(fen, text="Jouer", command=lambda : init_ennemy(5))
-bouton_jouer.pack()
+
 
 
 #mouvement du canon
